@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: api-deployment
+  namespace: application
 spec:
   replicas: 1
   selector:
@@ -20,10 +21,10 @@ spec:
           name: http
         - containerPort: 443
           name: https
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         env:
         - name: Mongo__Host
-          value: "mongo-service"
+          value: "mongoservice.database.svc.cluster.local"
         - name: Mongo__User
           value: "mongouser"
         - name: Mongo__Password
